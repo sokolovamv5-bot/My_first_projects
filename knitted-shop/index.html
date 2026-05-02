@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вязаные изделия ручной работы | Уютные вещи</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🧶 Уютные Вещи</h1>
+                    <p>Вязаные изделия ручной работы</p>
+                </div>
+                <nav class="nav">
+                    <a href="#home">Главная</a>
+                    <a href="#catalog">Каталог</a>
+                    <a href="#about">О нас</a>
+                    <a href="#contact">Контакты</a>
+                </nav>
+                <div class="cart-icon" onclick="toggleCart()">
+                    🛒 <span id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Тепло и уют в каждой петельке</h2>
+                <p>Уникальные вязаные изделия ручной работы для вас и ваших близких</p>
+                <a href="#catalog" class="btn-primary">Смотреть каталог</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2 class="section-title">Наш каталог</h2>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="sweaters">Свитера</button>
+                <button class="filter-btn" data-filter="scarves">Шарфы</button>
+                <button class="filter-btn" data-filter="hats">Шапки</button>
+                <button class="filter-btn" data-filter="toys">Игрушки</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О нас</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Мы создаем уникальные вязаные изделия с любовью и заботой о каждой детали. Каждое изделие выполняется вручную из качественной пряжи.</p>
+                    <p>Наши мастера имеют многолетний опыт и используют как традиционные техники вязания, так и современные дизайнерские решения.</p>
+                    <ul class="features-list">
+                        <li>✓ Натуральные материалы</li>
+                        <li>✓ Индивидуальный подход</li>
+                        <li>✓ Уникальный дизайн</li>
+                        <li>✓ Гарантия качества</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div class="placeholder-image">🧶</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="icon">📍</span>
+                        <div>
+                            <h4>Адрес</h4>
+                            <p>г. Москва, ул. Примерная, д. 15</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <div>
+                            <h4>Телефон</h4>
+                            <p>+7 (999) 123-45-67</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">✉️</span>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@knitted-shop.ru</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">⏰</span>
+                        <div>
+                            <h4>Режим работы</h4>
+                            <p>Пн-Пт: 10:00 - 19:00</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <h3>Заказать индивидуальный проект</h3>
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Телефон">
+                    <textarea placeholder="Опишите ваш заказ" rows="4" required></textarea>
+                    <button type="submit" class="btn-primary">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Корзина</h3>
+                <button class="close-btn" onclick="toggleCart()">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <p class="empty-cart">Корзина пуста</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Итого:</span>
+                    <span id="cart-total">0 ₽</span>
+                </div>
+                <button class="btn-primary btn-full" onclick="checkout()">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content product-modal-content">
+            <div class="modal-header">
+                <h3 id="product-modal-title">Товар</h3>
+                <button class="close-btn" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div class="product-modal-body" id="product-modal-body">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🧶 Уютные Вещи</h4>
+                    <p>Вязаные изделия ручной работы с душой</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="#home">Главная</a>
+                    <a href="#catalog">Каталог</a>
+                    <a href="#about">О нас</a>
+                    <a href="#contact">Контакты</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Соцсети</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">VKontakte</a>
+                        <a href="#">Telegram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Уютные Вещи. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
