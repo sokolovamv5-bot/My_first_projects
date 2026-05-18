@@ -1,5 +1,0 @@
-a=input("Первое число :")
-a=None if a=="" else float(a)
-b=input("Второе число :")
-b=None if b=="" else float(b)
-print("Сумма неизвестна") if a is None or b is None else print(a + b)
