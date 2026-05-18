@@ -44,6 +44,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Define base URL and root path for subdirectory installations (e.g., XAMPP htdocs/dom-uzorov)
+define('BASE_URL', '/dom-uzorov'); // Change this to match your folder name in htdocs
+define('ROOT_PATH', dirname(__DIR__));
+
 // Get the request URI and strip the base directory if running in a subdirectory
 $requestUri = $_SERVER['REQUEST_URI'];
 $scriptName = $_SERVER['SCRIPT_NAME'];
