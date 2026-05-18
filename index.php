@@ -44,10 +44,29 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Get the request URI and strip the base directory if running in a subdirectory
+$requestUri = $_SERVER['REQUEST_URI'];
+$scriptName = $_SERVER['SCRIPT_NAME'];
+
+// Determine the base path (e.g., /dom-uzorov)
+$basePath = '';
+if ($scriptName !== '/index.php') {
+    $basePath = dirname($scriptName);
+    if ($basePath !== '/' && $basePath !== '\\') {
+        // Strip the base path from the request URI
+        if (strpos($requestUri, $basePath) === 0) {
+            $requestUri = substr($requestUri, strlen($basePath));
+            if (empty($requestUri)) {
+                $requestUri = '/';
+            }
+        }
+    }
+}
+
 // Initialize router and dispatch request
 try {
     $router = new App\Core\Router();
-    $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+    $router->dispatch($requestUri, $_SERVER['REQUEST_METHOD']);
 } catch (\Exception $e) {
     http_response_code(500);
     echo "<h1>Error</h1>";
