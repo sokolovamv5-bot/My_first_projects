@@ -1,61 +1,46 @@
-```php
-# Dependencies
-vendor/
-
-# Build artifacts
-composer.lock
-
+```
 # Environment
 .env
 .env.local
 .env.*
 
-# Logs
+# Logs and temp files
 *.log
-
-# Temporary files
 *.tmp
-*.temp
+*.swp
 
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# IDE
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# Cache
-.cache/
-*.cache
-
-# Coverage reports
+# Dependencies
+node_modules/
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.tox/
 coverage/
 htmlcov/
 .coverage
 
-# Distribution
+# Build artifacts
 dist/
 build/
 target/
-
-# Python specific (if mixed project)
-__pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
+*.class
+*.o
+*.obj
+*.exe
+*.dll
 *.so
+*.a
+*.out
 
-# Node specific (if mixed project)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# PHP specific
-*.php~
-.htaccess
+# System files
+.DS_Store
+Thumbs.db
 ```

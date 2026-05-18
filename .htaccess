@@ -1,10 +1,10 @@
 RewriteEngine On
 RewriteBase /dom-uzorov/
 
-# Redirect all requests to index.php
+# Redirect all requests to index.php with url parameter
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # Security headers
 Header set X-Content-Type-Options "nosniff"
