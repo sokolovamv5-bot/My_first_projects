@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
 // Autoloader
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';
-    $baseDir = __DIR__ . '/../app/';
+    $baseDir = __DIR__ . '/app/';
     
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
@@ -26,7 +26,7 @@ spl_autoload_register(function ($class) {
 });
 
 // Load environment variables from .env file if exists
-$envFile = __DIR__ . '/../.env';
+$envFile = __DIR__ . '/.env';
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
@@ -44,10 +44,33 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Define base URL and root path for subdirectory installations (e.g., XAMPP htdocs/dom-uzorov)
+define('BASE_URL', '/dom-uzorov'); // Change this to match your folder name in htdocs
+define('ROOT_PATH', dirname(__DIR__));
+
+// Get the request URI and strip the base directory if running in a subdirectory
+$requestUri = $_SERVER['REQUEST_URI'];
+$scriptName = $_SERVER['SCRIPT_NAME'];
+
+// Determine the base path (e.g., /dom-uzorov)
+$basePath = '';
+if ($scriptName !== '/index.php') {
+    $basePath = dirname($scriptName);
+    if ($basePath !== '/' && $basePath !== '\\') {
+        // Strip the base path from the request URI
+        if (strpos($requestUri, $basePath) === 0) {
+            $requestUri = substr($requestUri, strlen($basePath));
+            if (empty($requestUri)) {
+                $requestUri = '/';
+            }
+        }
+    }
+}
+
 // Initialize router and dispatch request
 try {
     $router = new App\Core\Router();
-    $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+    $router->dispatch($requestUri, $_SERVER['REQUEST_METHOD']);
 } catch (\Exception $e) {
     http_response_code(500);
     echo "<h1>Error</h1>";

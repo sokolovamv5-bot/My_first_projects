@@ -1,29 +1,46 @@
 ```
-# Dependencies
-vendor/
-composer.lock
-
 # Environment
 .env
 .env.local
 .env.*
 
-# Logs
+# Logs and temp files
 *.log
+*.tmp
+*.swp
 
-# Cache
-.cache/
-.php_cs.cache
-
-# IDE
+# Editors
 .vscode/
 .idea/
 
-# OS
-.DS_Store
-Thumbs.db
+# Dependencies
+node_modules/
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.tox/
+coverage/
+htmlcov/
+.coverage
 
 # Build artifacts
-build/
 dist/
+build/
+target/
+*.pyc
+*.class
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
+# System files
+.DS_Store
+Thumbs.db
 ```
