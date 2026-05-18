@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
 // Autoloader
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';
-    $baseDir = __DIR__ . '/../app/';
+    $baseDir = __DIR__ . '/app/';
     
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
@@ -26,7 +26,7 @@ spl_autoload_register(function ($class) {
 });
 
 // Load environment variables from .env file if exists
-$envFile = __DIR__ . '/../.env';
+$envFile = __DIR__ . '/.env';
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
